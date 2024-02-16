@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <div id="app">
+    <h3>Продукты:</h3>
+    <button @click="sortDecrease">по уменьшению цены</button>
+    <button @click="sortIncrease">по увеличению цены</button>
+    <ul>
+      <li v-for="item in products" :key="item.id">
+        {{ item.name }}, {{ item.price }}
+      </li>
+    </ul>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        products: [
+          { id: 1, name: "milk", price: 65 },
+          { id: 2, name: "bread", price: 35 },
+          { id: 3, name: "salt", price: 20 },
+          { id: 4, name: "sugar", price: 75 },
+          { id: 5, name: "oil", price: 100 },
+          { id: 6, name: "rice", price: 60 }
+        ],
+      },
+      methods: {
+        sortDecrease() {
+          this.products = this.products.sort((a, b) => {
+            if (a.price < b.price) return 1;
+            if (a.price === b.price) return 0;
+            if (a.price > b.price) return -1;
+          })
+        },
+        sortIncrease() {
+          this.products = this.products.sort((a, b) => {
+            if (a.price > b.price) return 1;
+            if (a.price === b.price) return 0;
+            if (a.price < b.price) return -1;
+          })
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
